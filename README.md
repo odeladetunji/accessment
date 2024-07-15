@@ -32,7 +32,10 @@ http://localhost:8085/api/services/repo
 2.
 http://localhost:8085/api/services/commit
 
+## NOTE
+Unit Test file can be found in the rest_test.go in the service package
 
+Rate limiting was implemented in the cron package
 
 
 
