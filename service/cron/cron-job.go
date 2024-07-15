@@ -3,6 +3,7 @@ package cronjob
 import (
 	"encoding/json"
 	"fmt"
+	"time"
 
 	Entity "accessment.com/microservice/db/entity"
 	Repository "accessment.com/microservice/db/repository"
@@ -105,7 +106,14 @@ func (cron *CronJobService) UpdateCommitEveryHour() {
 			return
 		}
 
+		count := 0
 		for _, details := range repoDetails {
+			count++
+			if count == 5000 {
+				//Rate limit 5000 per hour for authenticated users
+				time.Sleep(1 * time.Hour)
+				count = 0
+			}
 			go cron.GetCommits(details.Name, details.Owner)
 		}
 	}
