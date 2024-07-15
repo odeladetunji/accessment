@@ -9,8 +9,6 @@ services:
     volumes:
       - accessApp:/usr/src/app/
     depends_on:
-      redis: # This service depends on redis. Start that first.
-        condition: service_started
       postgres:
         condition: service_healthy
     environment: # Pass environment variables to the service
