@@ -9,7 +9,7 @@ RUN apk add --no-cache tzdata
 RUN apk update && apk add --no-cache git
 
 # Set the current working directory inside the container
-WORKDIR /microsApp
+WORKDIR /accessApp
 
 # Copy go mod and sum files
 COPY go.mod go.sum ./
@@ -31,7 +31,7 @@ FROM alpine:latest
 RUN apk add --no-cache ca-certificates
 
 # Copy the Pre-built binary file from the previous stage. Observe we also copied the .env file
-COPY --from=builder /microsApp/main .
+COPY --from=builder /accessApp/main .
 
 #for time zone
 COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
@@ -40,7 +40,7 @@ COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
 #COPY --from=builder /usr/local/go/lib/time/zoneinfo.zip /
 #ENV ZONEINFO=/zoneinfo.zip
 # Expose http port 9001 
-EXPOSE 8083
+EXPOSE 8085
 
 #Command to run the executable
 CMD ["./main"]
