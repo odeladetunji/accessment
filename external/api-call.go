@@ -26,7 +26,7 @@ func (restcal *GitRestApiCall) ApiCall(endPoint string, data *bytes.Buffer, meth
 	// set the request header Content-Type for json
 	req.Header.Add("Accept", "application/vnd.github+json")
 	req.Header.Add("X-GitHub-Api-Version", "2022-11-28")
-	authorization := fmt.Sprintf("Bearer %s", utils.GetEnv("GITTOKEN", ""))
+	authorization := fmt.Sprintf("Bearer %s", utils.GetEnv("GITACCESSTOKEN", ""))
 	req.Header.Add("Authorization", authorization)
 	client := &http.Client{}
 	resp, err2 := client.Do(req)
