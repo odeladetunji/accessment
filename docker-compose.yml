@@ -4,7 +4,7 @@ services:
     container_name: accessment_microservice_server
     build: .
     ports:
-      - 8083:8083
+      - 8085:8085
     restart: unless-stopped
     volumes:
       - accessApp:/usr/src/app/
