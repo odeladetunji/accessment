@@ -36,7 +36,7 @@ func (reps *RepoService) GetRepoDetails(ctx *gin.Context) {
 		return
 	}
 
-	url := fmt.Sprintf("%s%s", utils.GitHubBaseUrl, "")
+	url := fmt.Sprintf("%s%s%s%s%s", utils.GitHubBaseUrl, "/repos/", utils.GetEnv("OWNER", ""), "/", utils.GetEnv("REPONAME", ""))
 	response, errr := external.RestCall.ApiCall(url, nil, "GET")
 	if errr != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err})

@@ -18,7 +18,7 @@ type CronJobService struct {
 
 func (cron *CronJobService) GetCommits(repoName, owner string) {
 
-	url := fmt.Sprintf("%s%s%s%s%s", utils.GitHubBaseUrl, "/repos/", owner, "/", repoName)
+	url := fmt.Sprintf("%s%s%s%s%s", utils.GitHubBaseUrl, "/repos/", utils.GetEnv("OWNER", ""), "/", utils.GetEnv("REPONAME", ""))
 	response, errr := external.RestCall.ApiCall(url, nil, "GET")
 	if errr != nil {
 		return

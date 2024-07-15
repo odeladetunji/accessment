@@ -23,6 +23,8 @@ services:
       POSTGRES_PORT: "5432"
       # Git Access Token (this is required)
       GITACCESSTOKEN: ""
+      OWNER: ""
+      REPONAME: ""
     networks:
       - microsnetwork
     # dns:
