@@ -8,6 +8,7 @@ type RepoDetail struct {
 	gorm.Model
 	ID             uint64 `gorm:"primaryKey"`
 	Name           string
+	Owner          string
 	Description    string
 	Url            string
 	Language       string

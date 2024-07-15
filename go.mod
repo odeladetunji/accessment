@@ -3,6 +3,7 @@ module accessment.com/microservice
 go 1.22.3
 
 require (
+	github.com/carlescere/scheduler v0.0.0-20170109141437-ee74d2f83d82
 	github.com/gin-gonic/gin v1.10.0
 	github.com/newrelic/go-agent/v3 v3.33.1
 	github.com/newrelic/go-agent/v3/integrations/logcontext-v2/logWriter v1.0.1

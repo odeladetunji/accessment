@@ -1,0 +1,68 @@
+version: "3"
+services:
+  app:
+    container_name: micros_microservice_server
+    build: .
+    ports:
+      - 8083:8083
+    restart: unless-stopped
+    volumes:
+      - microsApp:/usr/src/app/
+    depends_on:
+      redis: # This service depends on redis. Start that first.
+        condition: service_started
+      postgres:
+        condition: service_healthy
+    environment: # Pass environment variables to the service
+      # Redis DB Connection
+      REDIS_URL: redis:6379
+      REDIS_PASSWORD:
+      REDIS_DB: 0 # default for development environment
+      # PostgreSQL DB Connection
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: microsdata
+      POSTGRES_DB: micros_dev_db
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      # PostgreSQL for Doc app
+      POSTGRES_DOC_USER: postgres
+      POSTGRES_DOC_PASSWORD: microsdocdata
+      POSTGRES_DOC_DB: micros_doc_db
+      POSTGRES_DOC_HOST: postgresdocs
+      POSTGRES_DOC_PORT: "5434"
+      REDIS_READ_TIMEOUT: 60s
+      REDIS_WRITE_TIMEOUT: 60s
+    networks:
+      - microsnetwork
+    # dns:
+    #   - 8.8.8.8
+
+  postgres:
+    container_name: micros_postgres_database
+    image: postgres:14.2
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: microsdata
+      POSTGRES_DB: micros_dev_db
+      PGUSER: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 80s  
+    networks:
+      - microsnetwork
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+volumes:
+  microsApp:
+  postgres:
+
+networks:
+  microsnetwork:
+    driver: bridge
