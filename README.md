@@ -13,7 +13,7 @@ cd into the root directory and run
 
 `docker build .`
 
-`docker-compose build .`
+`docker compose up`
 
 Please you have to provide the following env variables in the docker-compose.yml file
 `GITACCESSTOKEN`
