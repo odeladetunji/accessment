@@ -24,5 +24,15 @@ these are currently empty strings, they are however required
 
 Please use your personal Git Access token for `GITACCESSTOKEN`
 
+## Endpoints 
+Method is GET for bot endpoints
+1.
+http://localhost:8085/api/services/repo
+
+2.
+http://localhost:8085/api/services/commit
+
+
+
 
 
