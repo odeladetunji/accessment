@@ -16,16 +16,13 @@ import (
 type RepoService struct {
 }
 
-var RepService RepoService
-var repoDetailRepo Repository.RepoDetailRepository = &Repository.RepoDetailRepo{}
-
 func (reps *RepoService) GetRepoDetails(ctx *gin.Context) {
 	if len(ctx.Query("repo")) == 0 {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "repo is required"})
 		return
 	}
 
-	repoDetails, err := repoDetailRepo.GetByName(ctx.Query("repo"))
+	repoDetails, err := RepoDetail.GetByName(ctx.Query("repo"))
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -67,7 +64,7 @@ func (reps *RepoService) GetRepoDetails(ctx *gin.Context) {
 	repo.WatcherCount = repoDetail.WatcherCount
 	repo.Owner = repoDetail.Owner.Login
 
-	errp := repoDetailRepo.Store(repo)
+	errp := RepoDetail.Store(repo)
 	if errp != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": errp.Error()})
 		return

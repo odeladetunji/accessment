@@ -16,6 +16,6 @@ func Routers() {
 func servicesRoutes(router *gin.Engine) {
 	var route *gin.RouterGroup = router.Group("/api/services")
 
-	route.GET("/repo", service.RepService.GetRepoDetails)
-	route.GET("/commit", service.RepService.GetCommits)
+	route.GET("/repo", service.Reposervice.GetRepoDetails)
+	route.GET("/commit", service.Reposervice.GetCommits)
 }

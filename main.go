@@ -2,12 +2,13 @@ package main
 
 import (
 	"accessment.com/microservice/routers"
-	cronjob "accessment.com/microservice/service/cron"
+	commitManager "accessment.com/microservice/service/commit-manager"
 )
 
 func main() {
 	//Cron Job
-	cron := cronjob.CronJobService{}
+	cron := commitManager.CommitManager{}
+	//commit runs every hour
 	go cron.UpdateCommitEveryHour()
 
 	//Router
